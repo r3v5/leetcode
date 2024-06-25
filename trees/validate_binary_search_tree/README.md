@@ -12,7 +12,6 @@ A valid BST is defined as follows:
 <img alt="" src="https://assets.leetcode.com/uploads/2020/12/01/tree1.jpg" style="width: 400px; height: 277px;">
 <pre><strong>Input:</strong> root = [2,1,3]
 <strong>Output:</strong> true
-<strong>Explanation:</strong> Nodes in blue are good.
 </pre>
 
 <p><strong>Example 2:</strong></p>
