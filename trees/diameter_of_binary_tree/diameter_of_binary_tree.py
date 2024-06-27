@@ -16,7 +16,7 @@ class TreeNode:
 
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        # use dfs for traversing the bst and calculating the height of each node ones and the max diameter
+        # use dfs for post-order traversal the bst form the bottom to top and calculating the height of each node ones and the max diameter
 
         if root == None:
             return -1
@@ -28,20 +28,22 @@ class Solution:
         while stack:
             cur, visited = stack.pop()
 
-            if visited:
-                left_height = height.get(cur.left, -1)
-                right_height = height.get(cur.right, -1)
-                height[cur] = 1 + max(left_height, right_height)
-                diameter = max(diameter, 2 + left_height + right_height)
+            if cur:
 
-            else:
-                stack.append([cur, True])
+                if visited:
+                    left_height = height.get(cur.left, -1)
+                    right_height = height.get(cur.right, -1)
+                    height[cur] = 1 + max(left_height, right_height)
+                    diameter = max(diameter, 2 + left_height + right_height)
 
-                if cur.right:
-                    stack.append([cur.right, False])
+                else:
+                    stack.append([cur, True])
 
-                if cur.left:
-                    stack.append([cur.left, False])
+                    if cur.right:
+                        stack.append([cur.right, False])
+
+                    if cur.left:
+                        stack.append([cur.left, False])
 
         return diameter
 

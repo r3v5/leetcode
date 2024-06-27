@@ -4,101 +4,171 @@ from typing import List, Optional
 class TreeNode:
     def __init__(
         self,
-        value: int = 0,
+        val: int = 0,
         left: Optional["TreeNode"] = None,
         right: Optional["TreeNode"] = None,
     ) -> None:
-        self.value = value
+        self.val = val
         self.left = left
         self.right = right
 
-    def insert(self, data: int) -> None:
-        # Check if the tree node is empty
-        if self.value == None:
-            self.value = data
-            self.left = TreeNode()
-            self.right = TreeNode()
+    def find_min_node_in_bst(self, root: Optional["TreeNode"]) -> Optional["TreeNode"]:
+        if not root:
+            return None
 
-        elif self.value == data:
-            return
+        cur = root
+        while cur.left:
+            cur = cur.left
 
-        elif data < self.value:
-            if self.left == None:
-                self.left = TreeNode(data)
+        return cur.val
+
+    def find_max_node_in_bst(self, root: Optional["TreeNode"]) -> Optional["TreeNode"]:
+        if not root:
+            return None
+
+        cur = root
+        while cur.right:
+            cur = cur.right
+
+        return cur.val
+
+    def insert_node_into_bst(
+        self, root: Optional["TreeNode"], val: int
+    ) -> Optional["TreeNode"]:
+        new_node = TreeNode(val)
+
+        if not root:
+            return new_node
+
+        cur = root
+
+        while cur:
+            if cur.val < val:
+
+                if not cur.right:
+                    cur.right = new_node
+                    break
+
+                else:
+                    cur = cur.right
+
             else:
-                self.left.insert(data)
+                if not cur.left:
+                    cur.left = new_node
+                    break
 
-        elif data > self.value:
-            if self.right == None:
-                self.right = TreeNode(data)
-            else:
-                self.right.insert(data)
+                else:
+                    cur = cur.left
 
-    def find(self, target: int) -> bool:
-        if self.value == None:
-            print(f"{target} is not found")
+        return root
+
+    def delete_node_from_bst(
+        self, root: Optional["TreeNode"], key: int
+    ) -> Optional["TreeNode"]:
+        # base case
+        if not root:
+            return root
+
+        # finding the node to delete
+        cur = root
+
+        if key > cur.val:
+            cur.right = self.delete_node_from_bst(cur.right, key)
+        elif key < cur.val:
+            cur.left = self.delete_node_from_bst(cur.left, key)
+        else:
+
+            # check if there is only one child
+            if not cur.left:
+                return cur.right
+            elif not cur.right:
+                return cur.left
+
+            # if there are two children -> find the min node from right subtree and change the min node with node to delete
+            # after delete the the min node from right subtree because now it's a parent node instead of node to delete
+            min_node = self.find_min_node_in_bst(cur.right)
+            cur.val = min_node.val
+            cur.right = self.delete_node_from_bst(cur.right, min_node.val)
+
+        return cur
+
+    def find_node_in_bst(self, root: Optional["TreeNode"], target: int) -> bool:
+        if not root:
             return False
 
-        stack = [self]
-
-        while stack:
-            cur = stack.pop()
-
-            if cur.value == target:
-                print(f"{target} is found")
+        cur = root
+        while cur:
+            if cur.val == target:
+                print(f"{target} is found in BST")
                 return True
+            elif cur.val < target:
+                cur = cur.right
+            else:
+                cur = cur.left
 
-            if cur.left and target < cur.value:
-                stack.append(cur.left)
-
-            if cur.right and target > cur.value:
-                stack.append(cur.right)
-
-        print(f"{target} is not found")
+        print(f"{target} is not found in BST")
         return False
 
-    def inorder_recursively(self) -> List[int]:
-        if self.value == None and self.left == None and self.right == None:
-            # If the tree is empty, return an empty list
+    def inorder_recursively(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
             return []
-        else:
-            left = []
-            right = []
 
-            if self.left:
-                left = self.left.inorder()
+        left = []
+        right = []
 
-            if self.right:
-                right = self.right.inorder()
+        if root.left:
+            left = self.inorder_recursively(root.left)
 
-            return left + [self.value] + right
+        if root.right:
+            right = self.inorder_recursively(root.right)
 
-    def inorder_iteratively(self) -> List[int]:
+        return left + [root.val] + right
+
+    def inorder_iteratively(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
+            return []
+
         res = []
         stack = []
-        cur = self
+        cur = root
 
         while stack or cur:
+
             while cur:
                 stack.append(cur)
                 cur = cur.left
 
             cur = stack.pop()
-            res.append(cur.value)
+            res.append(cur.val)
             cur = cur.right
 
         return res
 
-    def preorder_iteratively(self) -> List[int]:
-        if self.value is None:
+    def preorder_recursively(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
             return []
 
-        result = []
-        stack = [self]
+        left = []
+        right = []
+
+        if root.left:
+            left = self.preorder_recursively(root.left)
+
+        if root.right:
+            right = self.preorder_recursively(root.right)
+
+        return [root.val] + left + right
+
+    def preorder_iteratively(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
+            return []
+
+        res = []
+        stack = [root]
 
         while stack:
             cur = stack.pop()
-            result.append(cur.value)
+            res.append(cur.val)
 
             if cur.right:
                 stack.append(cur.right)
@@ -106,89 +176,78 @@ class TreeNode:
             if cur.left:
                 stack.append(cur.left)
 
-        return result
+        return res
 
-    def postorder_iteratively(self) -> List[int]:
-        if self.value is None:
+    def postorder_recursively(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
             return []
 
-        result = []
-        stack = []
-        cur = self
-        last_visited = None
+        left = []
+        right = []
 
-        while stack or cur:
+        if root.left:
+            left = self.postorder_recursively(root.left)
+
+        if root.right:
+            right = self.postorder_recursively(root.right)
+
+        return left + right + [root.val]
+
+    def postorder_iteratively(self, root: Optional["TreeNode"]) -> List[int]:
+        stack = [[root, False]]
+        res = []
+
+        while stack:
+            cur, visited = stack.pop()
+
             if cur:
-                stack.append(cur)
-                cur = cur.left
-            else:
-                peek_node = stack[-1]
-                if peek_node.right and peek_node.right != last_visited:
-                    cur = peek_node.right
+
+                if visited:
+                    res.append(cur.val)
+
                 else:
-                    last_visited = stack.pop()
-                    result.append(last_visited.value)
+                    stack.append([cur, True])
 
-        return result
+                    if cur.right:
+                        stack.append([cur.right, False])
 
-
-# Example usage
-t = TreeNode(15)
-t.insert(10)
-t.insert(18)
-t.insert(4)
-t.insert(11)
-t.insert(16)
-t.insert(20)
-
-print(t.postorder_iteratively())
-
-
-class Solution:
-    def maxDepthInorder(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
-
-        stack = []
-        cur = root
-        res = 0
-        depth = 0
-
-        while stack or cur:
-            while cur:
-                stack.append((cur, depth + 1))
-                cur = cur.left
-
-            cur, depth = stack.pop()
-            res = max(res, depth)
-
-            cur = cur.right
+                    if cur.left:
+                        stack.append([cur.left, False])
 
         return res
 
 
-class Solution:
-    def maxDepthPostorder(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
+root = TreeNode(1)
+root.left = TreeNode(7)
+root.right = TreeNode(9)
+root.left.left = TreeNode(2)
+root.left.right = TreeNode(6)
+root.left.right.left = TreeNode(5)
+root.left.right.right = TreeNode(11)
+root.right.right = TreeNode(9)
+root.right.right.left = TreeNode(5)
 
-        stack = []
-        cur = root
-        res = 0
-        last_visited = None
-        depth_stack = []
 
-        while stack or cur:
-            while cur:
-                stack.append(cur)
-                depth_stack.append(len(stack))
-                cur = cur.left
+print(f"In-order traversal recursively: {root.inorder_recursively(root)}")
+print(f"In-order traversal iteratively: {root.inorder_recursively(root)}\n")
+print(f"Pre-order traversal recursively: {root.preorder_recursively(root)}")
+print(f"Pre-order traversal iteratively: {root.preorder_iteratively(root)}\n")
+print(f"Post-order traversal recursively: {root.postorder_recursively(root)}")
+print(f"Post-order traversal iteratively: {root.postorder_iteratively(root)}\n")
 
-            peek = stack[-1]
-            if peek.right and last_visited != peek.right:
-                cur = peek.right
-            else:
-                last_visited = stack.pop()
-                res = max(res, depth_stack.pop())
 
-        return res
+root = TreeNode(4)
+root = root.insert_node_into_bst(root, 2)
+root = root.insert_node_into_bst(root, 7)
+root = root.insert_node_into_bst(root, 1)
+root = root.insert_node_into_bst(root, 3)
+root.find_node_in_bst(root, 7)
+root = root.delete_node_from_bst(root, 7)
+root.find_node_in_bst(root, 7)
+print(f"Min node in BST: {root.find_min_node_in_bst(root)}")
+print(f"Max node in BST: {root.find_max_node_in_bst(root)}")
+
+
+preorder = [3, 9, 20, 15, 7]
+index = 1
+print(preorder[1 : index + 1])
