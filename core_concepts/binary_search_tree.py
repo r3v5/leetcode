@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Optional
 
 
@@ -216,6 +217,25 @@ class TreeNode:
 
         return res
 
+    def bfs(self, root: Optional["TreeNode"]) -> List[int]:
+        if not root:
+            return None
+
+        result = []
+        queue = deque([root])
+
+        while queue:
+            cur = queue.popleft()
+            result.append(cur.val)
+
+            if cur.left:
+                queue.append(cur.left)
+
+            if cur.right:
+                queue.append(cur.right)
+
+        return result
+
 
 root = TreeNode(1)
 root.left = TreeNode(7)
@@ -234,6 +254,7 @@ print(f"Pre-order traversal recursively: {root.preorder_recursively(root)}")
 print(f"Pre-order traversal iteratively: {root.preorder_iteratively(root)}\n")
 print(f"Post-order traversal recursively: {root.postorder_recursively(root)}")
 print(f"Post-order traversal iteratively: {root.postorder_iteratively(root)}\n")
+print(f"BFS level order traversal: {root.bfs(root)}\n")
 
 
 root = TreeNode(4)
