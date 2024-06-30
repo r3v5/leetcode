@@ -201,19 +201,17 @@ class TreeNode:
         while stack:
             cur, visited = stack.pop()
 
-            if cur:
+            if visited:
+                res.append(cur.val)
 
-                if visited:
-                    res.append(cur.val)
+            else:
+                stack.append([cur, True])
 
-                else:
-                    stack.append([cur, True])
+                if cur.right:
+                    stack.append([cur.right, False])
 
-                    if cur.right:
-                        stack.append([cur.right, False])
-
-                    if cur.left:
-                        stack.append([cur.left, False])
+                if cur.left:
+                    stack.append([cur.left, False])
 
         return res
 
@@ -267,8 +265,3 @@ root = root.delete_node_from_bst(root, 7)
 root.find_node_in_bst(root, 7)
 print(f"Min node in BST: {root.find_min_node_in_bst(root)}")
 print(f"Max node in BST: {root.find_max_node_in_bst(root)}")
-
-
-preorder = [3, 9, 20, 15, 7]
-index = 1
-print(preorder[1 : index + 1])

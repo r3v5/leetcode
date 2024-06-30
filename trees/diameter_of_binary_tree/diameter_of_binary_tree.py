@@ -28,22 +28,20 @@ class Solution:
         while stack:
             cur, visited = stack.pop()
 
-            if cur:
+            if visited:
+                left_height = height.get(cur.left, -1)
+                right_height = height.get(cur.right, -1)
+                height[cur] = 1 + max(left_height, right_height)
+                diameter = max(diameter, 2 + left_height + right_height)
 
-                if visited:
-                    left_height = height.get(cur.left, -1)
-                    right_height = height.get(cur.right, -1)
-                    height[cur] = 1 + max(left_height, right_height)
-                    diameter = max(diameter, 2 + left_height + right_height)
+            else:
+                stack.append([cur, True])
 
-                else:
-                    stack.append([cur, True])
+                if cur.right:
+                    stack.append([cur.right, False])
 
-                    if cur.right:
-                        stack.append([cur.right, False])
-
-                    if cur.left:
-                        stack.append([cur.left, False])
+                if cur.left:
+                    stack.append([cur.left, False])
 
         return diameter
 
