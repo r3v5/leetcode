@@ -26,6 +26,6 @@ A root-to-leaf path is a path starting from the root and ending at any leaf node
 <ul>
 	<li>The number of nodes in the tree is in the range <code>[0, 5000]</code>.</li>
 	<li><code>-1000 <= Node.val <= 1000</code></li>
-	<li><code>-1000 <= targetSum.val <= 1000</code></li>
+	<li><code>-1000 <= targetSum <= 1000</code></li>
 </ul>
 </div>
