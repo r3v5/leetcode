@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Optional
 
 
@@ -22,52 +23,58 @@ class Solution:
         if not root:
             return []
 
-        # run dfs pre-order
+        # run bfs level order traversal
         hashmap = {}
         result = []
-        stack = [root]
+        queue = deque([root])
 
-        while stack:
-            node = stack.pop()
+        while queue:
+            level_length = len(queue)
 
-            # serialize each subtree to store the pattern in hashmap
-            serialized_tree = self.serialize(node)
+            for i in range(level_length):
+                node = queue.popleft()
 
-            if serialized_tree in hashmap:
-                hashmap[serialized_tree] += 1
-            else:
-                hashmap[serialized_tree] = 1
+                # serialize each subtree to store the pattern in hashmap
+                serialized_tree = self.serialize(node)
 
-            if hashmap[serialized_tree] == 2:
-                result.append(node)
+                if serialized_tree in hashmap:
+                    hashmap[serialized_tree] += 1
 
-            if node.right:
-                stack.append(node.right)
+                else:
+                    hashmap[serialized_tree] = 1
 
-            if node.left:
-                stack.append(node.left)
+                if hashmap[serialized_tree] == 2:
+                    result.append(node)
+
+                if node.left:
+                    queue.append(node.left)
+
+                if node.right:
+                    queue.append(node.right)
 
         return result
 
     # Serialize subtrees to identify duplicates
     def serialize(self, root: Optional[TreeNode]) -> str:
         if not root:
-            return "#"
+            return ""
 
-        stack = [root]
+        # run bfs level order for serializing each subtree on all levels
+        queue = deque([root])
         result = []
 
-        while stack:
-            node = stack.pop()
+        while queue:
+            node = queue.popleft()
 
             if not node:
                 result.append("#")
 
             else:
                 result.append(str(node.val))
-                stack.append(node.right)
-                stack.append(node.left)
+                queue.append(node.left)
+                queue.append(node.right)
 
+        print(",".join(result))
         return ",".join(result)
 
 
