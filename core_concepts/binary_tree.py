@@ -129,7 +129,7 @@ class TreeNode:
         if not root:
             return []
 
-        res = []
+        result = []
         stack = []
         cur = root
 
@@ -140,10 +140,10 @@ class TreeNode:
                 cur = cur.left
 
             cur = stack.pop()
-            res.append(cur.val)
+            result.append(cur.val)
             cur = cur.right
 
-        return res
+        return result
 
     def preorder_recursively(self, root: Optional["TreeNode"]) -> List[int]:
         if not root:
@@ -164,12 +164,12 @@ class TreeNode:
         if not root:
             return []
 
-        res = []
+        result = []
         stack = [root]
 
         while stack:
             cur = stack.pop()
-            res.append(cur.val)
+            result.append(cur.val)
 
             if cur.right:
                 stack.append(cur.right)
@@ -177,7 +177,7 @@ class TreeNode:
             if cur.left:
                 stack.append(cur.left)
 
-        return res
+        return result
 
     def postorder_recursively(self, root: Optional["TreeNode"]) -> List[int]:
         if not root:
@@ -196,13 +196,13 @@ class TreeNode:
 
     def postorder_iteratively(self, root: Optional["TreeNode"]) -> List[int]:
         stack = [[root, False]]
-        res = []
+        result = []
 
         while stack:
             cur, visited = stack.pop()
 
             if visited:
-                res.append(cur.val)
+                result.append(cur.val)
 
             else:
                 stack.append([cur, True])
@@ -213,7 +213,7 @@ class TreeNode:
                 if cur.left:
                     stack.append([cur.left, False])
 
-        return res
+        return result
 
     def bfs(self, root: Optional["TreeNode"]) -> List[int]:
         if not root:
