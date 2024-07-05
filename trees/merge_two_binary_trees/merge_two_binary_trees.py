@@ -65,7 +65,7 @@ class Solution:
 
                     elif left2:
                         merged_node.left = TreeNode(left2.val)
-                        queue.append([left2, None, merged_node.left])
+                        queue.append([None, left2, merged_node.left])
 
                 if right1 or right2:
 
@@ -79,7 +79,7 @@ class Solution:
 
                     elif right2:
                         merged_node.right = TreeNode(right2.val)
-                        queue.append([right2, None, merged_node.right])
+                        queue.append([None, right2, merged_node.right])
 
         return merged_root
 
