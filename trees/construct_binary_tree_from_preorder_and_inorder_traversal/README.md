@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description//">105. Construct Binary Tree from Preorder and Inorder Traversal</a></h2><h3>Medium</h3><hr><div><p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return the binary tree.
+<h2><a href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/description/">105. Construct Binary Tree from Preorder and Inorder Traversal</a></h2><h3>Medium</h3><hr><div><p>Given two integer arrays <code>preorder</code> and <code>inorder</code> where <code>preorder</code> is the preorder traversal of a binary tree and <code>inorder</code> is the inorder traversal of the same tree, construct and return the binary tree.
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
