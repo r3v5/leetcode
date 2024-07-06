@@ -21,38 +21,41 @@ class Solution:
             return root
 
         # finding the node to delete
-        cur = root
+        node = root
 
-        if key > cur.val:
-            cur.right = self.deleteNode(cur.right, key)
-        elif key < cur.val:
-            cur.left = self.deleteNode(cur.left, key)
+        if key > node.val:
+            node.right = self.deleteNode(node.right, key)
+
+        elif key < node.val:
+            node.left = self.deleteNode(node.left, key)
+
         else:
 
             # check if there is only one child
-            if not cur.left:
-                return cur.right
-            elif not cur.right:
-                return cur.left
+            if not node.left:
+                return node.right
+
+            elif not node.right:
+                return node.left
 
             # if there are two children -> find the min node from right subtree and change the min node with node to delete
             # after delete the the min node from right subtree because now it's a parent node instead of node to delete
-            min_node = self.find_min_node_in_bst(cur.right)
-            cur.val = min_node.val
-            cur.right = self.deleteNode(cur.right, min_node.val)
+            min_node = self.find_min_node_in_bst(node.right)
+            node.val = min_node.val
+            node.right = self.deleteNode(node.right, min_node.val)
 
-        return cur
+        return node
 
     def find_min_node_in_bst(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         if not root:
             return None
 
-        cur = root
+        node = root
 
-        while cur.left:
-            cur = cur.left
+        while node.left:
+            node = node.left
 
-        return cur
+        return node
 
 
 ex1 = TreeNode(5)

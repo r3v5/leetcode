@@ -17,21 +17,21 @@ class TreeNode:
         if not root:
             return None
 
-        cur = root
-        while cur.left:
-            cur = cur.left
+        node = root
+        while node.left:
+            node = node.left
 
-        return cur.val
+        return node.val
 
     def find_max_node_in_bst(self, root: Optional["TreeNode"]) -> Optional["TreeNode"]:
         if not root:
             return None
 
-        cur = root
-        while cur.right:
-            cur = cur.right
+        node = root
+        while node.right:
+            node = node.right
 
-        return cur.val
+        return node.val
 
     def insert_node_into_bst(
         self, root: Optional["TreeNode"], val: int
@@ -41,25 +41,25 @@ class TreeNode:
         if not root:
             return new_node
 
-        cur = root
+        node = root
 
-        while cur:
-            if cur.val < val:
+        while node:
+            if node.val < val:
 
-                if not cur.right:
-                    cur.right = new_node
+                if not node.right:
+                    node.right = new_node
                     break
 
                 else:
-                    cur = cur.right
+                    node = node.right
 
             else:
-                if not cur.left:
-                    cur.left = new_node
+                if not node.left:
+                    node.left = new_node
                     break
 
                 else:
-                    cur = cur.left
+                    node = node.left
 
         return root
 
@@ -71,41 +71,41 @@ class TreeNode:
             return root
 
         # finding the node to delete
-        cur = root
+        node = root
 
-        if key > cur.val:
-            cur.right = self.delete_node_from_bst(cur.right, key)
-        elif key < cur.val:
-            cur.left = self.delete_node_from_bst(cur.left, key)
+        if key > node.val:
+            node.right = self.delete_node_from_bst(node.right, key)
+        elif key < node.val:
+            node.left = self.delete_node_from_bst(node.left, key)
         else:
 
             # check if there is only one child
-            if not cur.left:
-                return cur.right
-            elif not cur.right:
-                return cur.left
+            if not node.left:
+                return node.right
+            elif not node.right:
+                return node.left
 
             # if there are two children -> find the min node from right subtree and change the min node with node to delete
             # after delete the the min node from right subtree because now it's a parent node instead of node to delete
-            min_node = self.find_min_node_in_bst(cur.right)
-            cur.val = min_node.val
-            cur.right = self.delete_node_from_bst(cur.right, min_node.val)
+            min_node = self.find_min_node_in_bst(node.right)
+            node.val = min_node.val
+            node.right = self.delete_node_from_bst(node.right, min_node.val)
 
-        return cur
+        return node
 
     def find_node_in_bst(self, root: Optional["TreeNode"], target: int) -> bool:
         if not root:
             return False
 
-        cur = root
-        while cur:
-            if cur.val == target:
+        node = root
+        while node:
+            if node.val == target:
                 print(f"{target} is found in BST")
                 return True
-            elif cur.val < target:
-                cur = cur.right
+            elif node.val < target:
+                node = node.right
             else:
-                cur = cur.left
+                node = node.left
 
         print(f"{target} is not found in BST")
         return False
@@ -131,17 +131,17 @@ class TreeNode:
 
         result = []
         stack = []
-        cur = root
+        node = root
 
-        while stack or cur:
+        while stack or node:
 
-            while cur:
-                stack.append(cur)
-                cur = cur.left
+            while node:
+                stack.append(node.val)
+                node = node.left
 
-            cur = stack.pop()
-            result.append(cur.val)
-            cur = cur.right
+            node = stack.pop()
+            result.append(node.val)
+            node = node.right
 
         return result
 
@@ -168,14 +168,14 @@ class TreeNode:
         stack = [root]
 
         while stack:
-            cur = stack.pop()
-            result.append(cur.val)
+            node = stack.pop()
+            result.append(node.val)
 
-            if cur.right:
-                stack.append(cur.right)
+            if node.right:
+                stack.append(node.right)
 
-            if cur.left:
-                stack.append(cur.left)
+            if node.left:
+                stack.append(node.left)
 
         return result
 
@@ -199,19 +199,19 @@ class TreeNode:
         result = []
 
         while stack:
-            cur, visited = stack.pop()
+            node, visited = stack.pop()
 
             if visited:
-                result.append(cur.val)
+                result.append(node.val)
 
             else:
-                stack.append([cur, True])
+                stack.append([node, True])
 
-                if cur.right:
-                    stack.append([cur.right, False])
+                if node.right:
+                    stack.append([node.right, False])
 
-                if cur.left:
-                    stack.append([cur.left, False])
+                if node.left:
+                    stack.append([node.left, False])
 
         return result
 
@@ -223,14 +223,14 @@ class TreeNode:
         queue = deque([root])
 
         while queue:
-            cur = queue.popleft()
-            result.append(cur.val)
+            node = queue.popleft()
+            result.append(node.val)
 
-            if cur.left:
-                queue.append(cur.left)
+            if node.left:
+                queue.append(node.left)
 
-            if cur.right:
-                queue.append(cur.right)
+            if node.right:
+                queue.append(node.right)
 
         return result
 

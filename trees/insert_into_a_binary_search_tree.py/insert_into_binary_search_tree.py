@@ -3,12 +3,7 @@ from typing import Optional
 
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(
-        self,
-        val: int = 0,
-        left: Optional["TreeNode"] = None,
-        right: Optional["TreeNode"] = None,
-    ) -> None:
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
@@ -16,32 +11,31 @@ class TreeNode:
 
 class Solution:
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        new_node = TreeNode(val)
-
+        # base case
         if not root:
-            return new_node
+            return TreeNode(val)
 
-        cur = root
+        node = root
 
-        while cur:
+        while node:
 
-            if cur.val < val:
+            if node.val < val:
 
-                if not cur.right:
-                    cur.right = new_node
+                if not node.right:
+                    node.right = TreeNode(val)
                     break
 
                 else:
-                    cur = cur.right
+                    node = node.right
 
-            else:
+            elif node.val > val:
 
-                if not cur.left:
-                    cur.left = new_node
+                if not node.left:
+                    node.left = TreeNode(val)
                     break
 
                 else:
-                    cur = cur.left
+                    node = node.left
 
         return root
 
