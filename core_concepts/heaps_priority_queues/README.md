@@ -1,1 +1,1 @@
-<img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*cN_AR3fwVNRIf-pYIAYqYw.jpeg"
+<img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*cN_AR3fwVNRIf-pYIAYqYw.jpeg" style="width: 800px; height: 500px;">
