@@ -18,22 +18,22 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         # dfs in-order from top to bottom
         stack = []
-        cur = root
+        node = root
         count_smallest = 0
 
-        while stack or cur:
+        while stack or node:
 
-            while cur:
-                stack.append(cur)
-                cur = cur.left
+            while node:
+                stack.append(node)
+                node = node.left
 
-            cur = stack.pop()
+            node = stack.pop()
             count_smallest += 1
 
             if count_smallest == k:
-                return cur.val
+                return node.val
 
-            cur = cur.right
+            node = node.right
 
         return None
 
