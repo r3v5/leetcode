@@ -1,3 +1,4 @@
+<img alt="" src="/Users/ianmiller/leetcode/core_concepts/heaps_priority_queues/heaps-time-complexity.png" style="width: 800px; height: 500px;">
 <img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*xxfTylXjspbgcZwfeWSx3A.jpeg" style="width: 800px; height: 500px;">
 <img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YsG9jcE4XiDMj-E_VhX03A.jpeg" style="width: 800px; height: 500px;">
 <img alt="" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0hd7XsIV3D092XKKTZg6Pg.jpeg" style="width: 800px; height: 500px;">
