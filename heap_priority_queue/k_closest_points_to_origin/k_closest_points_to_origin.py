@@ -35,3 +35,18 @@ class Solution:
             k -= 1
 
         return result
+
+
+ex1 = [[1, 3], [-2, 2]]
+k_ex1 = 1
+
+ex2 = [[3, 3], [5, -1], [-2, 4]]
+k_ex2 = 2
+
+driver = Solution()
+print(
+    f"Example 1:\nInput: points = [[1, 3], [-2, 2]], k = 1\nOutput: {driver.kClosest(ex1, k_ex1)}\n"
+)
+print(
+    f"Example 2:\nInput: points = [[3, 3], [5, -1],[-2, 4], k = 2\nOutput: {driver.kClosest(ex2, k_ex2)}\n"
+)
