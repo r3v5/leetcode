@@ -24,6 +24,8 @@ class Solution:
 
         return result
 
+    # Time Complexity: O(n)
+
 
 ex1 = "abccccdd"
 ex2 = "a"
