@@ -15,6 +15,8 @@ class Solution:
 
         return longest
 
+    # Time Complexity: O(n)
+
 
 ex1 = "abcabcbb"
 ex2 = "bbbbb"

@@ -15,6 +15,8 @@ class Solution:
 
         return longest
 
+    # Time Complexity: O(n)
+
 
 ex1 = "ABAB"
 ex1_k = 2

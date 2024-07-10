@@ -29,6 +29,8 @@ class Solution:
 
         return result
 
+    # Time Complexity: O(n)
+
 
 ex_1 = [1, 1, 1]
 ex_1_k = 2
