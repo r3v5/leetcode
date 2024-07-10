@@ -15,6 +15,8 @@ class Solution:
 
         return True
 
+    # Time Complexity: O(n + m)
+
 
 driver = Solution()
 ex1_ransom_note = "a"
