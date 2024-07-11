@@ -3,30 +3,29 @@ from typing import List
 
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
-        result = float("inf")
         nums.sort()
+        closest_sum = float("-inf")
 
-        # since we will already check integers by left and right pointers
         for i in range(len(nums) - 2):
             l = i + 1
             r = len(nums) - 1
 
             while l < r:
-                three_sum = nums[i] + nums[l] + nums[r]
+                cur_sum = nums[i] + nums[l] + nums[r]
 
-                if three_sum == target:
-                    return three_sum
+                if cur_sum == target:
+                    return cur_sum
 
-                elif abs(target - three_sum) < abs(target - result):
-                    result = three_sum
+                elif abs(target - cur_sum) < abs(target - closest_sum):
+                    closest_sum = cur_sum
 
-                elif three_sum < target:
+                elif cur_sum < target:
                     l += 1
 
-                else:
+                elif cur_sum > target:
                     r -= 1
 
-        return result
+        return closest_sum
 
         # Time Complexity: O(n^2)
 
