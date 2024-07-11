@@ -9,7 +9,7 @@ class Twitter:
         # the 1st tweet has timestamp 0, 2nd tweet has timestame -1
         self.timestamp = 0
 
-        self.tweet_map = {}  # userId -> list of [count, tweetIds]
+        self.tweet_map = {}  # userId -> list of [timestamp, tweetIds]
         self.follow_map = {}  # userId -> set of followeeId
 
     def postTweet(self, userId: int, tweetId: int) -> None:
