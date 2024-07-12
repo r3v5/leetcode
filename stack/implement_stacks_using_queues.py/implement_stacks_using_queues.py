@@ -41,7 +41,7 @@ stack.push(2)
 print(f"Stack after push(2): {stack}\n")
 
 param_3 = stack.top()
-print(f"Top of the stack after: {param_3}\n")
+print(f"Top of the stack: {param_3}\n")
 
 stack.pop()
 print(f"Stack after pop(): {stack}\n")
