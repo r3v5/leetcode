@@ -13,7 +13,6 @@
 <pre><strong>Input:</strong> head = [1,2], n = 1
 <strong>Output:</strong> [1]
 
-
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
 
