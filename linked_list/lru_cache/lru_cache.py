@@ -77,6 +77,9 @@ class LRUCache:
             self.delete_node(self.hashmap[lru.key])
             del self.hashmap[lru.key]
 
+    # Time: O(1)
+    # Space: O(n)
+
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
