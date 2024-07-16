@@ -1,4 +1,5 @@
 import heapq
+from collections import defaultdict
 from typing import List
 
 
@@ -9,13 +10,10 @@ class Twitter:
         # the 1st tweet has timestamp 0, 2nd tweet has timestame -1
         self.timestamp = 0
 
-        self.tweet_map = {}  # userId -> list of [timestamp, tweetIds]
-        self.follow_map = {}  # userId -> set of followeeId
+        self.tweet_map = defaultdict(list)  # userId -> list of [timestamp, tweetIds]
+        self.follow_map = defaultdict(set)  # userId -> set of followeeId
 
     def postTweet(self, userId: int, tweetId: int) -> None:
-        if userId not in self.tweet_map:
-            self.tweet_map[userId] = []
-
         self.tweet_map[userId].append([self.timestamp, tweetId])
         self.timestamp -= 1
 
@@ -24,9 +22,6 @@ class Twitter:
         min_heap = []
 
         # add userId to follow map to include user's tweets in feed
-        if userId not in self.follow_map:
-            self.follow_map[userId] = set()
-
         self.follow_map[userId].add(userId)
 
         for followeeId in self.follow_map[userId]:
@@ -56,13 +51,10 @@ class Twitter:
         return feed
 
     def follow(self, followerId: int, followeeId: int) -> None:
-        if followerId not in self.follow_map:
-            self.follow_map[followerId] = set()
-
         self.follow_map[followerId].add(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        if followerId in self.follow_map and followeeId in self.follow_map[followerId]:
+        if followeeId in self.follow_map[followerId]:
             self.follow_map[followerId].remove(followeeId)
 
 
