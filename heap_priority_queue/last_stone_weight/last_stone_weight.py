@@ -24,10 +24,14 @@ class Solution:
             elif first == second:
                 continue
 
-        # if equal stones were destroyed, we add 0 to the stones
-        stones.append(0)
+        if len(stones) == 1:
+            return -1 * stones[0]
 
-        return -1 * stones[0]
+        else:
+            return 0
+
+    # Time: O(nlogn)
+    # Space: O(1)
 
 
 stones = [2, 7, 4, 1, 8, 1]
