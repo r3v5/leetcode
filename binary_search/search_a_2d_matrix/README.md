@@ -10,14 +10,15 @@ You must write a solution in O(log(m * n)) time complexity.
 <p><strong>Example 1:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/10/05/mat.jpg" style="width: 400px; height: 277px;">
 <pre><strong>Input:</strong> matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
-<strong>Output:</strong> true
+<strong>Output:</strong> True
 </pre>
 
 <p><strong>Example 2:</strong></p>
 <img alt="" src="https://assets.leetcode.com/uploads/2020/10/05/mat2.jpg" style="width: 400px; height: 277px;">
 <pre><strong>Input:</strong> matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
-<strong>Output:</strong> false
+<strong>Output:</strong> False
 </pre>
+
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
